@@ -30,6 +30,6 @@ app.use((req, res, next) => {
 	next();
 });
 
-app.use("/api/excuse", excuseRoutes);
+app.use("/api/excuses", excuseRoutes);
 
 module.exports = app;
