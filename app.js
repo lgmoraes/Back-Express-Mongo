@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const excuseRoutes = require("./routes/excuses");
+const excuseRoutes = require("./routes/excuse");
 
 require("dotenv").config();
 
