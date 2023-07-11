@@ -4,7 +4,8 @@
 	"description": "",
 	"main": "server.js",
 	"scripts": {
-		"test": "test",
+		"start": "node server",
+		"dev": "nodemon server",
 		"seedDB": "node scripts/seedDB"
 	},
 	"author": "",
