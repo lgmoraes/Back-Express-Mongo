@@ -12,7 +12,11 @@ mongoose
 		useUnifiedTopology: true,
 	})
 	.then(() => console.log("Connexion à MongoDB réussie !"))
-	.catch(() => console.log("Connexion à MongoDB échouée !"));
+	.catch(() =>
+		console.log(
+			consoleColors.red + "Connexion à MongoDB échouée !" + consoleColors.reset
+		)
+	);
 
 const app = express();
 app.use(express.json());
