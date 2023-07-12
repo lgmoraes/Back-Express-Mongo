@@ -1,8 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const path = require("path");
 
 const excuseRoutes = require("./routes/excuse");
 const userRoutes = require("./routes/user");
+const getAvatar = require("./middlewares/getAvatar");
 
 const consoleColors = require("./utils/consoleColors");
 
@@ -36,5 +38,6 @@ app.use((req, res, next) => {
 
 app.use("/api/excuses", excuseRoutes);
 app.use("/api/auth", userRoutes);
+app.use("/avatars/:user", getAvatar);
 
 module.exports = app;
