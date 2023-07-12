@@ -1,10 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
+
 const excuseRoutes = require("./routes/excuse");
+const userRoutes = require("./routes/user");
 
-require("dotenv").config();
-
-const Excuse = require("./models/Excuse");
+const consoleColors = require("./utils/consoleColors");
 
 mongoose
 	.connect(process.env.CONNECTION_STRING, {
@@ -35,5 +35,6 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/excuses", excuseRoutes);
+app.use("/api/auth", userRoutes);
 
 module.exports = app;

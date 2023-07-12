@@ -1,9 +1,11 @@
 const express = require("express");
-const router = express.Router();
 const stuffCtrl = require("../controllers/excuse");
+const auth = require("../middlewares/auth");
 
-router.get("/", stuffCtrl.getAllExcuses);
-router.get("/:http_code", stuffCtrl.getExcuses);
-router.post("/", stuffCtrl.createExcuse);
+const router = express.Router();
+
+router.get("/", auth, stuffCtrl.getAllExcuses);
+router.get("/:http_code", auth, stuffCtrl.getExcuses);
+router.post("/", auth, stuffCtrl.createExcuse);
 
 module.exports = router;
