@@ -38,6 +38,7 @@ app.use((req, res, next) => {
 
 app.use("/api/excuses", excuseRoutes);
 app.use("/api/auth", userRoutes);
+app.use("/api/users", userRoutes);
 app.use("/avatars/:user", getAvatar);
 
 module.exports = app;

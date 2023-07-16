@@ -1,10 +1,14 @@
+const fs = require("fs");
+const path = require("path");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
 const TEXT = {
 	created: "Utilisateur créé !",
+	addImage: "Image ajouté",
 	wrongCredentials: "Paire login/mot de passe incorrecte",
+	removeFileError: "Erreur lors de la suppression du fichier :",
 };
 
 exports.signup = (req, res, next) => {
@@ -47,6 +51,37 @@ exports.login = (req, res, next) => {
 					});
 				})
 				.catch((error) => res.status(500).json({ error }));
+		})
+		.catch((error) => res.status(500).json({ error }));
+};
+
+exports.setAvatar = (req, res, next) => {
+	const userId = req.auth.userId;
+
+	User.findOne({ _id: userId }).then((user) => {
+		if (!user.avatarFilename) return;
+
+		const oldAvatar = path.resolve(
+			__dirname,
+			"../uploads/avatars",
+			user.avatarFilename
+		);
+
+		fs.unlink(oldAvatar, (error) => {
+			if (error) {
+				console.error(TEXT.removeFileError, error);
+			}
+		});
+	});
+
+	User.updateOne(
+		{ _id: userId },
+		{
+			avatarFilename: `${req.file.filename}`,
+		}
+	)
+		.then((result) => {
+			res.status(200).json({ message: result });
 		})
 		.catch((error) => res.status(500).json({ error }));
 };
